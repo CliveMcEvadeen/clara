@@ -9,6 +9,8 @@ from llama_index.llms.gemini import Gemini
 # from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core import Settings
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+
 
 load_dotenv()
 
@@ -19,9 +21,8 @@ BeautifulSoupWebReader = download_loader("BeautifulSoupWebReader")
 loader = BeautifulSoupWebReader()
 documents = loader.load_data(urls=[URL])
 
-# service_context = ServiceContext.from_defaults(llm=Gemini())
 Settings.llm = Gemini()
-# Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
+Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
 Settings.node_parser = SentenceSplitter(chunk_size=512, chunk_overlap=20)
 Settings.num_output = 512
 Settings.context_window = 3900
