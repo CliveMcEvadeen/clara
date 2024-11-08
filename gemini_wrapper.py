@@ -8,6 +8,3 @@ resp = llm.stream_complete(
 for r in resp:
     print(r.text, end="")
 
-
-def data(data: str):
-   pass
